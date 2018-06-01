@@ -16,7 +16,7 @@ app.use(cors({
 
 var mongoose =require('mongoose');
 
-mongoose.connect('mongodb://localhost/youtube');
+mongoose.connect('mongodb://localhost/proyectoII');
 
 
 // view engine setup
