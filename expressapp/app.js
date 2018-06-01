@@ -16,8 +16,27 @@ app.use(cors({
 
 var mongoose =require('mongoose');
 
-mongoose.connect('mongodb://localhost/proyectoII');
+mongoose.connect('mongodb://localhost/youtube');
 
+//passport
+var passport = require('passport');
+var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+app.use(session({
+  name:'myname.sid',
+  resave:false,
+  saveUninitialized:false,
+  secret:'secret',
+  cookie:{
+    maxAge:36000000,
+    httpOnly:false,
+    secure:false
+  },
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
+require('./passport-config');
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
